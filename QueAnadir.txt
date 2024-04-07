@@ -1,0 +1,4 @@
+Falta poner mas acertijos
+
+Falta que muestre tres posibles opciones y que solo una sea la correcta
+
