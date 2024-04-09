@@ -12,9 +12,12 @@ from PyQt5.QtWidgets import (
     QVBoxLayout,
 )
 
-
 # Función para leer los acertijos desde un archivo
 def leer_acertijos(nombre_archivo):
+    """
+    Lee los acertijos desde un archivo y los devuelve como una lista de tuplas.
+    Cada tupla contiene el acertijo y su solución.
+    """
     acertijos = []
     with open(nombre_archivo, "r", encoding="utf-8") as archivo:
         for linea in archivo:
@@ -31,6 +34,7 @@ class MainWindow(QWidget):
         self.initUI()
 
     def initUI(self):
+        # Configurar el diseño de la ventana principal
         layout = QVBoxLayout()
 
         # Widgets para nombre y edad
@@ -86,16 +90,23 @@ class MainWindow(QWidget):
         self.boton_comprobar.hide()
         self.boton_nuevo_acertijo.hide()
 
+        # Leer los acertijos desde el archivo
         self.acertijos = leer_acertijos("pythonacertijos/acertijos.txt")
         self.acertijo_actual = ""
         self.solucion_actual = ""
 
     def mostrar_nuevo_acertijo(self):
+        """
+        Mostrar un nuevo acertijo al azar de la lista de acertijos.
+        """
         self.acertijo_actual, self.solucion_actual = random.choice(self.acertijos)
         self.respuesta_usuario.setText("")
         self.label_acertijo.setText(self.acertijo_actual)
 
     def comprobar_respuesta(self):
+        """
+        Comprobar si la respuesta del usuario es correcta y mostrar un mensaje.
+        """
         solucion_ingresada = self.respuesta_usuario.text().strip().lower()
         if solucion_ingresada == self.solucion_actual.lower():
             QMessageBox.information(
@@ -109,6 +120,9 @@ class MainWindow(QWidget):
             )
 
     def preguntar_nombre_y_edad(self):
+        """
+        Obtener el nombre y la edad del usuario y mostrar un mensaje de bienvenida.
+        """
         nombre = self.entry_nombre.text()
         edad = self.entry_edad.text()
         QMessageBox.information(
